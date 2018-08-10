@@ -1,0 +1,150 @@
+#!/usr/bin/env bash
+
+export __LS_OPTIONS='--color=auto -h'
+
+#-----------------------------------------------------------------------------------#
+#    Listings, Sorting, Creating and Removing Files and Directories      #
+#-----------------------------------------------------------------------------------#
+alias l='ls $__LS_OPTIONS -aCF'
+alias ls='ls $__LS_OPTIONS'
+alias sl='ls $__LS_OPTIONS'
+alias la='ls $__LS_OPTIONS -la'
+alias ll='ls $__LS_OPTIONS -lh'
+alias lr='ls -lR'                 # recursive
+alias lx='ls -lXB' #sort by ext
+alias lk='ls -lSra' #soft by size
+alias lss='ls -shaxSr'            # sort by size
+alias lst='ls -latr'						#sort by date
+alias lsx='ls -ax'                # sort right to left rather then in columns
+alias ls.="ls | sed -e 's/\.[a-zA-Z]*$//'"
+alias lsg='ls -la | grep'					#requires an argument
+alias lsa='ls -la $1 | less'
+alias lls='ls -l -h -g -F --color=auto'
+alias lm='ls -al |more'           # pipe through 'more'
+alias lll='ls -lLBhX --time-style=locale'
+alias lsh='ls -lah'						#human readable (sizes) long and all ;-)
+alias dir='ls --color -Flah'
+alias rdir='ls -aFlhRX | less'
+
+alias cdb='cd $OLDPWD'						#Go back to the previous Dir
+alias cd..='cd ..'
+alias cd...='cd ../..'
+alias cd....='cd ../../..'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'``
+
+alias mkdir='mkdir -p -v'
+alias mv='mv -iv'
+alias cp='cp -i'
+alias f="find . |grep "
+alias rm='rm -Iv --one-file-system --preserve-root'
+
+#Compression (cd into dir, will compress every single folder)
+alias tardir='for i in *; do if [ -d "$i" ]; then tar czf "$i".tar.gz  "$i"; fi; done'
+
+#-----------------------------------------------------------------------------------#
+#                                    package manager                                            #
+#-----------------------------------------------------------------------------------#
+alias up='sudo apt-get update && sudo apt-get install $@'
+alias upg='sudo apt-get update && sudo apt-get upgrade'
+alias upins='sudo apt-get update && sudo apt-get install'
+alias ins='sudo apt-get install'
+alias reins='sudo apt-get install --reinstall'
+alias uins='sudo apt-get remove'
+alias puins='sudo apt-get remove --purge'
+alias autoremove='sudo apt-get autoremove'
+alias deball='sudo dpkg -i *.deb'
+alias clean='sudo apt-get autoclean; sudo apt-get clean'
+alias levelup='sudo apt-get update && sudo apt-get dist-upgrade'
+alias ss='apt-cache search'					#Search package | Requires Apt
+alias infm='apt-cache show'					#Show package detailed info
+alias ver='apt-cache policy'					#Show All Versions
+alias whereare='dpkg -L $1'					#Find where the all package is installed, similar to whereis
+alias ins?='dpkg -l $1'						#Check if the package is installed
+alias ppapurge='sudo ppa-purge'					#Revert to older package version | requires ppa-purge
+alias ppaadd='sudo add-apt-repository'				#Add repos from launchpad Ex: ppa:banshee-team/ppa
+alias ppadel='sudo add-apt-repository -r'			#Removes repos from launchpad Ex: ppa:banshee-team/ppa
+alias keystone='sudo apt-key add '				#Add block of gpg keys manually
+alias src='sudo xdg-open /etc/apt/sources.list'			#Edit Sourcelist for PPAs
+#Auto Get Missing PPA LaunchPad GPG Keys
+alias autokey='sudo apt-get update 2> /tmp/keymissing; for key in $(grep "NO_PUBKEY" /tmp/keymissing |sed "s/.*NO_PUBKEY //"); do echo -e "\nProcessing key: $key"; gpg --keyserver pool.sks-keyservers.net --recv $key && gpg --export --armor $key | sudo apt-key add -; done'
+
+#-----------------------------------------------------------------------------------#
+#                                                Misc.                                                   #
+#-----------------------------------------------------------------------------------#
+alias brcup='source ~/.bashrc'					#Reload bashrc without closing terminal
+alias brc='xdg-open ~/.bashrc &'				#Edit Bashrc file
+
+alias hhg='history | grep'					#Search History for keywords
+alias hhl='history'						#View History
+
+alias ooo='xdg-open'						#Open any file
+alias mydistro='lsb_release -a && uname -a'			#Show distro version
+
+#Display facts of the day
+alias today='echo `date +%a\ %b\ %d\ %Y\ -\ Week:\ %W\ Day:\ %j`'
+
+alias p='ps auxf'
+alias pg='ps aux | grep' #requires an argument
+
+alias clr='printf "\33[2J"'				#Clear screen, keep prompt at eye level
+
+alias myip='echo Current IP Address: $(curl -s http://checkip.dyndns.org/ | grep -o "[[:digit:].]\+")'
+
+# watch network
+# netstat: -tuapoNl tcp, udp, all sockets, programs, timers, hwd names, listening
+alias net4='watch --interval=2 "sudo netstat -tuapoNl -4"'
+alias net6='watch --interval=2 "sudo netstat -tuapoNl -6"'
+alias net46='watch --interval=2 "sudo netstat -tuapoNl --inet --inet6"'
+# netstat: -rvNa route, verbose, hwd names, all sockets
+alias netr='sudo netstat -rvNa --inet --inet6'
+# netstat: -ivNa interface, verbose, hwd names, all sockets
+alias neti='sudo netstat -ivNa --inet --inet6'
+
+alias mem='free -mot'
+alias sp='du -chs --apparent-size'
+alias ht='htop -u `whoami`'
+alias hta='htop'
+
+alias g='git $@'
+
+
+
+
+
+
+# function checks if the application is installed
+function __add_command_replace_alias() {
+    if [ -x "`which $2 2>&1`" ]; then
+        alias $1=$2
+    fi
+}
+
+if [ -x "`which most 2>&1`" ]; then
+    alias less=most
+    export PAGER=most
+fi
+
+if [ -x "`which vim 2>&1`" ]; then
+        export EDITOR=vim
+fi
+
+__add_command_replace_alias tail 'multitail'
+__add_command_replace_alias df 'pydf'
+__add_command_replace_alias traceroute 'mtr'
+__add_command_replace_alias tracepath 'mtr'
+__add_command_replace_alias top 'htop'
+
+function allcolors() {
+    # credit to http://askubuntu.com/a/279014
+    for x in 0 1 4 5 7 8; do
+        for i in `seq 30 37`; do
+            for a in `seq 40 47`; do
+                echo -ne "\e[$x;$i;$a""m\\\e[$x;$i;$a""m\e[0;37;40m "
+            done
+            echo
+        done
+    done
+    echo ""
+}

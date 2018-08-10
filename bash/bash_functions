@@ -1,0 +1,83 @@
+zzz () { grep -i -n "$1" ~/.bashrc ~/.bash_aliases; } 				#Search thru bashrc
+mcd () { mkdir -p -v $1; cd $1 ;}				#Make new folder and cd into it, in one step
+
+#Easy Extract, to be fixed cbz into dir, cbt,cb7
+extract		()
+{
+			  if [ -f $1 ] ; then
+      				case $1 in
+          			*.tar.bz2)   tar xvjf $1    ;;
+          			*.tar.gz)    tar xvzf $1    ;;
+          			*.bz2)       bunzip2 $1     ;;
+          			*.rar)       rar x $1       ;;
+          			*.cbr)       rar x -ad $1   ;;
+          			*.gz)        gunzip $1      ;;
+          			*.tar)       tar xvf $1     ;;
+          			*.cbt)       tar xvf $1     ;;
+          			*.tbz2)      tar xvjf $1    ;;
+          			*.tgz)       tar xvzf $1    ;;
+          			*.zip)       unzip $1       ;;
+          			*.cbz)       unzip $1       ;;
+          			*.Z)         uncompress $1  ;;
+          			*.7z)        7z x $1        ;;
+          			*.cb7)       7z x $1        ;;
+          			*)           echo "don't know how to extract '$1'..." ;;
+      			esac
+  			else
+      			echo "'$1' is not a valid file!"
+  			fi
+}
+
+# Creates an archive from given directory
+mktar() { tar cvf  "${1%%/}.tar"     "${1%%/}/"; }
+mktgz() { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }
+mktbz() { tar cvjf "${1%%/}.tar.bz2" "${1%%/}/"; }
+
+# look in WordNet and Webster
+dic()	{ curl dict://dict.org/d:${1}:wn; }
+wd()	{ curl dict://dict.org/d:${1}:web1913; }
+# find matches of $1, with optional strat $2 and optional db $3
+ref ()  {
+    if [[ -z $3 ]]; then
+        curl dict://dict.org/m:${1}:english:${2};
+    else
+        curl dict://dict.org/m:${1}:${3}:${2};
+    fi
+}
+
+# define $1 using optional db of $2
+def ()  { curl dict://dict.org/d:${1}:${2} ;}
+
+pggg () {
+    if pgrep -f $@ > /dev/null;
+    then
+        pgrep -f $@ | xargs ps -o user,pid,stat,rss,vsz,pcpu,args \
+                               --sort -pcpu,-rss;
+    else
+        exit 1;
+    fi
+}
+
+goo () { url=$(echo "http://www.google.com/search?hl=en&q=$@" | sed 's/ /+/g'); $BROWSER $url; }
+
+yt  () { url=$(echo "http://www.youtube.com/results?search_query=$@&page={startPage?}&utm_source=opensearch" | sed 's/ /+/g'); $BROWSER $url; }
+
+imdb() { url=$(echo "http://www.imdb.com/find?s=all&q=$@" | sed 's/ /+/g'); $BROWSER $url; }
+
+ff()   { find . -name $@ -print; }
+
+function    rmd              { rm -fr $@; }
+
+function    psa              { ps aux $@; }
+function    psu              { ps  ux $@; }
+
+function    dub              { du -sclb $@; }
+function    duk              { du -sclk $@; }
+function    dum              { du -sclm $@; }
+
+###### shows various info on running activities
+# copyright 2007 - 2010 Christopher Bratusek
+function treeps() {
+	ps f -u $USER -o command,pid,%cpu,%mem,time,etime,tty | \
+		awk 'NR <= 1 {print;next} !/awk/ && $0~var' var=${1:-".*"}
+}
