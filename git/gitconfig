@@ -44,12 +44,6 @@
 # alias gcmsg='git commit -m'
 # alias 'gcn!'='git commit -v --no-edit --amend'
 
-# alias gco='git checkout'
-# alias gcb='git checkout -b'
-# alias gcd='git checkout develop'
-# alias gch='git checkout hotfix'
-# alias gcm='git checkout master'
-# alias gcr='git checkout release'
 
 # alias gcf='git config --list'
 
@@ -158,65 +152,78 @@
 # -----------------------------------------------------#
 #         Feature Branches Steps                        #
 # ----------------------------------------------------#
-#$ git checkout -b myfeature develop # creates and switches to new branch
+x#$ git checkout -b myfeature develop # creates and switches to new branch
 #makes changes and commit often. Then, merge back into develop
 x#$ git checkout develop # switch to develop branch
-#$ git merge --no-ff myfeature # the --no-ff flag causes the merge to always create a new commit object, even if the merge could be performed with a fast-forward. This avoid losing information about the historical existence of a feature branch and group together all commits.
-#$ git branch -d myfeature # delete myfeature branch
+x#$ git merge --no-ff myfeature
+x#$ git branch -d myfeature # delete myfeature branch
 #$ git push origin develop # updates origin
 #
 # -----------------------------------------------------#
 #         Release Branches Steps                        #
 # ----------------------------------------------------#
-# $ git checkout -b release-1.2 develop
+x# $ git checkout -b release-1.2 develop
 # bump version number (update gradle file) 1.2
-# $ git commit -a -m “Bumped version number to 1.2”
+x# $ git commit -a -m “Bumped version number to 1.2”
 # bug fixes may be applied in this branch but not features.
 # finalizing the release by merging to master
 x# $ git checkout master
-# $ git merge --no-ff release-1.2
+x# $ git merge --no-ff release-1.2
 # $ git tag -a 1.2
 # to keep the changes made in the release branch, we need to merge back into develop
 x# $ git checkout develop
-# $ git merge --no-ff release-1.2
+x# $ git merge --no-ff release-1.2
 # we can now safely remove the release branch
-# $ git branch -d release-1.2
+x# $ git branch -d release-1.2
 # -----------------------------------------------------#
 #         Hotfixes Branches Steps                       #
 # ----------------------------------------------------#
-# $ git checkout -b hotfix-1.2.1 master
+x# $ git checkout -b hotfix-1.2.1 master
 # bump version number (update gradle file) to 1.2.1
-# $ git commit -a -m “Bumped version number to 1.2.1”
+x# $ git commit -a -m “Bumped version number to 1.2.1”
 # fix the bug and commit the fix in one or more separate commits.
-# $ git commit -m “Fixed severe production problem”
+x# $ git commit -m “Fixed severe production problem”
 # merge back into master and develop.
 x# $ git checkout master
-# $ git merge --no-ff hotfix-1.2.1
+x# $ git merge --no-ff hotfix-1.2.1
 # $ git tag -a 1.2.1
 x# $ git checkout develop
-# $ git merge --no-ff hotfix-1.2.1
-# $ git branch -d hotfix-1.2.1
+x# $ git merge --no-ff hotfix-1.2.1
+x# $ git branch -d hotfix-1.2.1
 
 [alias]
-  cod = checkout develop
-  com = checkout master
+  # checkout
+  co = checkout # checkout a branch by using git co some-branch
+  cob = checkout -b # create and checkout a new branch
+  codev = checkout develop
+  comas = checkout master
+  cobdev = "!f() { git checkout -b $1 develop; } ; f"
+  cobmas = "!f() { git checkout -b $1 master; } ; f"
 
-  cobd = '!f() { git checkout -b $1 develop}; f'
-
-  st = status
-  # checkout a branch by using git co some-branch
-  co = checkout
-  # create and checkout a new branch
-  cob = checkout -b
-  # opens the gitconfig file with my default editor
-  ec = config --global -e
-  #
-  up = !git pull --rebase --prune $@ && git submodule update --init --recursive
+  # add commit
+  cmm = commit -m
+  cmam = commit -a -m
   cm = !git add -A && git commit -m
   save = !git add -A && git commit -m 'SAVEPOINT'
   wip = !git add -u && git commit -m "WIP"
   amend = commit -a --amend
   wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
+
+  # branch
+  bdel = branch -d
+
+  # merge
+  # the --no-ff flag causes the merge to always create a new commit object, even if the merge could be performed with a fast-forward.
+  # This avoid losing information about the historical existence of a feature branch and group together all commits.
+  merge = merge -no-ff
+
+  st = status
+  # opens the gitconfig file with my default editor
+  cfg = config --global -e
+  cfgls ="!f() { git config --list; }; f"
+
+  #
+  up = !git pull --rebase --prune $@ && git submodule update --init --recursive
   bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs git branch -d; }; f"
   bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
 
@@ -237,8 +244,8 @@ x# $ git checkout develop
   # https://git-scm.com/docs/git-log
   # via https://medium.com/@payload.dd/thanks-for-the-git-st-i-will-use-this-4da5839a21a4
 
-[merge]
-  ff = only
+# [merge]
+#   ff = only
   # I pretty much never mean to do a real merge, since I use a rebase workflow.
   # Note: this global option applies to all merges, including those done during a git pull
   # https://git-scm.com/docs/git-config#git-config-mergeff
