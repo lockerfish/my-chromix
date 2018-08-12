@@ -89,6 +89,8 @@ alias h='history'						#View History
 alias hhg='history | grep'					#Search History for keywords
 alias hhr='fc -l'
 
+alias g='git $@'
+
 alias ooo='xdg-open'						#Open any file
 alias mydistro='lsb_release -a && uname -a'			#Show distro version
 

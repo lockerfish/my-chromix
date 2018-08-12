@@ -11,23 +11,27 @@
 # #-----------------------------------------------------------------------------------#
 # #                                                Git.                                                     #
 # #-----------------------------------------------------------------------------------#
-# alias g='git $@'
 #
 # alias ga='git add'
 # alias gaa='git add --all'
 # alias gapa='git add --patch'
+# alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip--"'
+
 # alias gb='git branch'
 # alias gba='git branch -a'
 # alias gbd='git branch -d'
 # alias gbda='git branch --no-color --merged | command grep -vE "^(\*|\s*(master|develop|dev)\s*$)" | command xargs -n 1 git branch -d'
-# alias gbl='git blame -b -w'
 # alias gbnm='git branch --no-merged'
 # alias gbr='git branch --remote'
+# alias ggsup='git branch --set-upstream-to=origin/$(git_current_branch)'
+
+# alias gbl='git blame -b -w'
 # alias gbs='git bisect'
 # alias gbsb='git bisect bad'
 # alias gbsg='git bisect good'
 # alias gbsr='git bisect reset'
 # alias gbss='git bisect start'
+
 # alias gc='git commit -v'
 # alias 'gc!'='git commit -v --amend'
 # alias gca='git commit -v -a'
@@ -35,23 +39,28 @@
 # alias gcam='git commit -a -m'
 # alias 'gcan!'='git commit -v -a --no-edit --amend'
 # alias 'gcans!'='git commit -v -a -s --no-edit --amend'
-# alias gcb='git checkout -b'
-# alias gcd='git checkout develop'
-# alias gcf='git config --list'
-# alias gch='git checkout hotfix'
-# alias gcl='git clone --recursive'
-# alias gclean='git clean -fd'
-# alias gcm='git checkout master'
+# alias gcs='git commit -S'
+# alias gcsm='git commit -s -m'
 # alias gcmsg='git commit -m'
 # alias 'gcn!'='git commit -v --no-edit --amend'
+
 # alias gco='git checkout'
-# alias gcount='git shortlog -sn'
+# alias gcb='git checkout -b'
+# alias gcd='git checkout develop'
+# alias gch='git checkout hotfix'
+# alias gcm='git checkout master'
+# alias gcr='git checkout release'
+
+# alias gcf='git config --list'
+
+# alias gcl='git clone --recursive'
+
+# alias gclean='git clean -fd'
+
 # alias gcp='git cherry-pick'
 # alias gcpa='git cherry-pick --abort'
 # alias gcpc='git cherry-pick --continue'
-# alias gcr='git checkout release'
-# alias gcs='git commit -S'
-# alias gcsm='git commit -s -m'
+
 # alias gd='git diff'
 # alias gdca='git diff --cached'
 # alias gdct='git describe --tags `git rev-list --tags --max-count=1`'
@@ -64,7 +73,6 @@
 #
 # alias ggpull='git pull origin $(git_current_branch)'
 # alias ggpush='git push origin $(git_current_branch)'
-# alias ggsup='git branch --set-upstream-to=origin/$(git_current_branch)'
 # alias ghf='git hf'
 # alias ghff='git hf feature'
 # alias ghfh='git hf hotfix'
@@ -74,10 +82,7 @@
 # alias ghh='git help'
 # alias gignore='git update-index --assume-unchanged'
 # alias gignored='git ls-files -v | grep "^[[:lower:]]"'
-# alias git-svn-dcommit-push='git svn dcommit && git push github master:svntrunk'
 # alias github='web_search github'
-# alias gk='\gitk --all --branches'
-# alias gke='\gitk --all $(git log -g --pretty=%h)'
 # alias gl='git pull'
 # alias glg='git log --stat'
 # alias glgg='git log --graph'
@@ -85,7 +90,6 @@
 # alias glgm='git log --graph --max-count=10'
 # alias glgp='git log --stat -p'
 # alias glo='git log --oneline --decorate'
-# alias globurl='noglob urlglobber '
 # alias glog='git log --oneline --decorate --graph'
 # alias gloga='git log --oneline --decorate --graph --all'
 # alias glol='git log --graph --pretty='\''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'\'' --abbrev-commit'
@@ -124,10 +128,8 @@
 # alias grup='git remote update'
 # alias grv='git remote -v'
 # alias gsb='git status -sb'
-# alias gsd='git svn dcommit'
-# alias gsi='git submodule init'
 # alias gsps='git show --pretty=short --show-signature'
-# alias gsr='git svn rebase'
+# alias gcount='git shortlog -sn'
 # alias gss='git status -s'
 # alias gst='git status'
 # alias gsta='git stash save'
@@ -137,7 +139,6 @@
 # alias gstl='git stash list'
 # alias gstp='git stash pop'
 # alias gsts='git stash show --text'
-# alias gsu='git submodule update'
 # alias gts='git tag -s'
 # alias gtv='git tag | sort -V'
 # alias gundo='git reset && git checkout . && git clean -fd'
@@ -147,7 +148,7 @@
 # alias gup='git pull --rebase'
 # alias gupv='git pull --rebase -v'
 # alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
-# alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip--"'
+
 #steps:
 #$ git checkout -b myfeature develop # creates and switches to new branch
 #makes changes and commit often. Then, merge back into develop
