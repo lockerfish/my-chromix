@@ -160,7 +160,7 @@
 # ----------------------------------------------------#
 #$ git checkout -b myfeature develop # creates and switches to new branch
 #makes changes and commit often. Then, merge back into develop
-#$ git checkout develop # switch to develop branch
+x#$ git checkout develop # switch to develop branch
 #$ git merge --no-ff myfeature # the --no-ff flag causes the merge to always create a new commit object, even if the merge could be performed with a fast-forward. This avoid losing information about the historical existence of a feature branch and group together all commits.
 #$ git branch -d myfeature # delete myfeature branch
 #$ git push origin develop # updates origin
@@ -173,11 +173,11 @@
 # $ git commit -a -m “Bumped version number to 1.2”
 # bug fixes may be applied in this branch but not features.
 # finalizing the release by merging to master
-# $ git checkout master
+x# $ git checkout master
 # $ git merge --no-ff release-1.2
 # $ git tag -a 1.2
 # to keep the changes made in the release branch, we need to merge back into develop
-# $ git checkout develop
+x# $ git checkout develop
 # $ git merge --no-ff release-1.2
 # we can now safely remove the release branch
 # $ git branch -d release-1.2
@@ -190,16 +190,19 @@
 # fix the bug and commit the fix in one or more separate commits.
 # $ git commit -m “Fixed severe production problem”
 # merge back into master and develop.
-# $ git checkout master
+x# $ git checkout master
 # $ git merge --no-ff hotfix-1.2.1
 # $ git tag -a 1.2.1
-# $ git check develop
+x# $ git checkout develop
 # $ git merge --no-ff hotfix-1.2.1
 # $ git branch -d hotfix-1.2.1
 
 [alias]
-  # feature branches
-  cobd = checkout -b $1 develop
+  cod = checkout develop
+  com = checkout master
+
+  cobd = '!f() { git checkout -b $1 develop}; f'
+
   st = status
   # checkout a branch by using git co some-branch
   co = checkout
