@@ -7,7 +7,7 @@ cd ~
 echo 'Clone chromix'
 [ -d chromix-old ] && rm -rf chromix-old
 [ -d .chromix ] && mv .chromix chromix-old
-git clone git@github.com:lockerfish/chromix.git .chromix
+git clone git@github.com:lockerfish/my-chromix.git .chromix
 
 echo 'Link bash files'
 # bash

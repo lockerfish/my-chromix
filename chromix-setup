@@ -12,9 +12,11 @@ apt_packages=(
   'gnupg2',
   'nodejs',
   'python-pip',
+  'python-pygments',
   'ffmpeg',
   'blender',
   'gimp',
+  'lighttpd',
   'most',
   'multitail',
   'htop',
@@ -37,7 +39,7 @@ npm_packages=(
 
 #list extra
 extras=(
-  # Synchronize Settings, Snippets, Themes, File Icons, Launch, Keybindings, Workspaces and Extensions 
+  # Synchronize Settings, Snippets, Themes, File Icons, Launch, Keybindings, Workspaces and Extensions
   # Across Multiple Machines Using GitHub Gist.
   'code --install-extension Shan.code-settings-sync'
 )
@@ -55,7 +57,7 @@ sudo apt -y full-upgrade
 #-----------------------------------------------------------#
 echo "
 /-----------------------------------------------------------/
-  Adding Google Dart debian package repo and key 
+  Adding Google Dart debian package repo and key
   https://www.dartlang.org/tools/sdk#install
   https://flutter.io/setup-linux/#get-sdk
 /-----------------------------------------------------------/
@@ -65,7 +67,7 @@ sudo sh -c 'curl https://storage.googleapis.com/download.dartlang.org/linux/debi
 
 echo "
 /-----------------------------------------------------------/
-  Adding Microsoft VSCode debian package repo and key 
+  Adding Microsoft VSCode debian package repo and key
   https://code.visualstudio.com/docs/setup/linux
 /-----------------------------------------------------------/
 "
@@ -75,7 +77,7 @@ sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode s
 
 echo "
 /-----------------------------------------------------------/
-  Adding Nodesource debian package repo and key 
+  Adding Nodesource debian package repo and key
   https://deb.nodesource.com/setup_8.x
 /-----------------------------------------------------------/
 "
@@ -109,10 +111,10 @@ npm_install() {
 /-----------------------------------------------------------/
   "
   npm ls -g $pkg_name >/dev/null 2>&1
-  
+
   if [ $? -eq 0 ]; then
     echo "$pkg_name: already installed. Updating..."
-    sudo npm update -g $pkg_name 
+    sudo npm update -g $pkg_name
   else
     sudo npm install -g $pkg_name
     echo "$pkg_name: is now installed successfully!"
@@ -143,7 +145,7 @@ done
 for extra in ${extras[*]}; do
   if [ $extra ]; then
    echo "executing: $extra"
-   eval $extra 
+   eval $extra
   fi
 done
 

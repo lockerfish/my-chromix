@@ -7,7 +7,6 @@ export __LS_OPTIONS='--color=auto -h'
 #-----------------------------------------------------------------------------------#
 alias l='ls $__LS_OPTIONS -aCF'
 alias ls='ls $__LS_OPTIONS'
-alias sl='ls $__LS_OPTIONS'
 alias la='ls $__LS_OPTIONS -la'
 alias ll='ls $__LS_OPTIONS -lh'
 alias lr='ls -lR'                 # recursive
@@ -24,24 +23,35 @@ alias lm='ls -al |more'           # pipe through 'more'
 alias lll='ls -lLBhX --time-style=locale'
 alias lsh='ls -lah'						#human readable (sizes) long and all ;-)
 alias dir='ls --color -Flah'
-alias rdir='ls -aFlhRX | less'
+alias dirr='ls -aFlhRX | less'
 
-alias cdb='cd $OLDPWD'						#Go back to the previous Dir
-alias cd..='cd ..'
-alias cd...='cd ../..'
-alias cd....='cd ../../..'
+alias '~'='cd ~'
 alias ..='cd ..'
 alias ...='cd ../..'
-alias ....='cd ../../..'``
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......=../../../../..
+alias 1='cd -'
+alias 2='cd -2'
+alias 3='cd -3'
+alias 4='cd -4'
+alias 5='cd -5'
+alias 6='cd -6'
+alias 7='cd -7'
+alias 8='cd -8'
+alias 9='cd -9'
+alias cdb='cd $OLDPWD'						#Go back to the previous Dir
 
-alias mkdir='mkdir -p -v'
+alias md='mkdir -p -v'
 alias mv='mv -iv'
 alias cp='cp -i'
-alias f="find . |grep "
+alias f="find . | grep "
 alias rm='rm -Iv --one-file-system --preserve-root'
 
 #Compression (cd into dir, will compress every single folder)
 alias tardir='for i in *; do if [ -d "$i" ]; then tar czf "$i".tar.gz  "$i"; fi; done'
+
+alias fs='stat -f "%z bytes"'
 
 #-----------------------------------------------------------------------------------#
 #                                    package manager                                            #
@@ -62,10 +72,7 @@ alias infm='apt-cache show'					#Show package detailed info
 alias ver='apt-cache policy'					#Show All Versions
 alias whereare='dpkg -L $1'					#Find where the all package is installed, similar to whereis
 alias ins?='dpkg -l $1'						#Check if the package is installed
-alias ppapurge='sudo ppa-purge'					#Revert to older package version | requires ppa-purge
-alias ppaadd='sudo add-apt-repository'				#Add repos from launchpad Ex: ppa:banshee-team/ppa
-alias ppadel='sudo add-apt-repository -r'			#Removes repos from launchpad Ex: ppa:banshee-team/ppa
-alias keystone='sudo apt-key add '				#Add block of gpg keys manually
+alias addkey='sudo apt-key add '				#Add block of gpg keys manually
 alias src='sudo xdg-open /etc/apt/sources.list'			#Edit Sourcelist for PPAs
 #Auto Get Missing PPA LaunchPad GPG Keys
 alias autokey='sudo apt-get update 2> /tmp/keymissing; for key in $(grep "NO_PUBKEY" /tmp/keymissing |sed "s/.*NO_PUBKEY //"); do echo -e "\nProcessing key: $key"; gpg --keyserver pool.sks-keyservers.net --recv $key && gpg --export --armor $key | sudo apt-key add -; done'
@@ -74,10 +81,15 @@ alias autokey='sudo apt-get update 2> /tmp/keymissing; for key in $(grep "NO_PUB
 #                                                Misc.                                                   #
 #-----------------------------------------------------------------------------------#
 alias brcup='source ~/.bashrc'					#Reload bashrc without closing terminal
-alias brc='xdg-open ~/.bashrc &'				#Edit Bashrc file
+alias brc='$EDITOR ~/.bashrc'
 
+alias v='vim'
+alias vi='vim'
+alias h='history'						#View History
 alias hhg='history | grep'					#Search History for keywords
-alias hhl='history'						#View History
+alias hhr='fc -l'
+
+alias g='git $@'
 
 alias ooo='xdg-open'						#Open any file
 alias mydistro='lsb_release -a && uname -a'			#Show distro version
@@ -85,9 +97,13 @@ alias mydistro='lsb_release -a && uname -a'			#Show distro version
 #Display facts of the day
 alias today='echo `date +%a\ %b\ %d\ %Y\ -\ Week:\ %W\ Day:\ %j`'
 
+alias _='sudo'
 alias p='ps auxf'
 alias pg='ps aux | grep' #requires an argument
 
+alias grep='grep  --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
+
+alias c='pygmentize -f terminal -g'
 alias clr='printf "\33[2J"'				#Clear screen, keep prompt at eye level
 
 alias myip='echo Current IP Address: $(curl -s http://checkip.dyndns.org/ | grep -o "[[:digit:].]\+")'
@@ -102,17 +118,15 @@ alias netr='sudo netstat -rvNa --inet --inet6'
 # netstat: -ivNa interface, verbose, hwd names, all sockets
 alias neti='sudo netstat -ivNa --inet --inet6'
 
+alias DELETE='lwp-request -m '\''DELETE'\'
+alias OPTIONS='lwp-request -m '\''OPTIONS'\'
+alias PUT='lwp-request -m '\''PUT'\'
+alias TRACE='lwp-request -m '\''TRACE'\'
+
 alias mem='free -mot'
 alias sp='du -chs --apparent-size'
 alias ht='htop -u `whoami`'
 alias hta='htop'
-
-alias g='git $@'
-
-
-
-
-
 
 # function checks if the application is installed
 function __add_command_replace_alias() {

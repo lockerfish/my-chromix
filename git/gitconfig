@@ -7,21 +7,229 @@
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	excludesfile = ~/.gitignore
 
+
+# #-----------------------------------------------------------------------------------#
+# #                                                Git.                                                     #
+# #-----------------------------------------------------------------------------------#
+#
+# alias ga='git add'
+# alias gaa='git add --all'
+# alias gapa='git add --patch'
+# alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip--"'
+
+# alias gb='git branch'
+# alias gba='git branch -a'
+# alias gbd='git branch -d'
+# alias gbda='git branch --no-color --merged | command grep -vE "^(\*|\s*(master|develop|dev)\s*$)" | command xargs -n 1 git branch -d'
+# alias gbnm='git branch --no-merged'
+# alias gbr='git branch --remote'
+# alias ggsup='git branch --set-upstream-to=origin/$(git_current_branch)'
+
+# alias gbl='git blame -b -w'
+# alias gbs='git bisect'
+# alias gbsb='git bisect bad'
+# alias gbsg='git bisect good'
+# alias gbsr='git bisect reset'
+# alias gbss='git bisect start'
+
+# alias gc='git commit -v'
+# alias 'gc!'='git commit -v --amend'
+# alias gca='git commit -v -a'
+# alias 'gca!'='git commit -v -a --amend'
+# alias gcam='git commit -a -m'
+# alias 'gcan!'='git commit -v -a --no-edit --amend'
+# alias 'gcans!'='git commit -v -a -s --no-edit --amend'
+# alias gcs='git commit -S'
+# alias gcsm='git commit -s -m'
+# alias gcmsg='git commit -m'
+# alias 'gcn!'='git commit -v --no-edit --amend'
+
+
+# alias gcf='git config --list'
+
+# alias gcl='git clone --recursive'
+
+# alias gclean='git clean -fd'
+
+# alias gcp='git cherry-pick'
+# alias gcpa='git cherry-pick --abort'
+# alias gcpc='git cherry-pick --continue'
+
+# alias gd='git diff'
+# alias gdca='git diff --cached'
+# alias gdct='git describe --tags `git rev-list --tags --max-count=1`'
+# alias gdt='git diff-tree --no-commit-id --name-only -r'
+# alias gdw='git diff --word-diff'
+#
+# alias gf='git fetch'
+# alias gfa='git fetch --all --prune'
+# alias gfo='git fetch origin'
+#
+# alias ggpull='git pull origin $(git_current_branch)'
+# alias ggpush='git push origin $(git_current_branch)'
+# alias ghf='git hf'
+# alias ghff='git hf feature'
+# alias ghfh='git hf hotfix'
+# alias ghfr='git hf release'
+# alias ghfs='git hf support'
+# alias ghfu='git hf update'
+# alias ghh='git help'
+# alias gignore='git update-index --assume-unchanged'
+# alias gignored='git ls-files -v | grep "^[[:lower:]]"'
+# alias github='web_search github'
+# alias gl='git pull'
+# alias glg='git log --stat'
+# alias glgg='git log --graph'
+# alias glgga='git log --graph --decorate --all'
+# alias glgm='git log --graph --max-count=10'
+# alias glgp='git log --stat -p'
+# alias glo='git log --oneline --decorate'
+# alias glog='git log --oneline --decorate --graph'
+# alias gloga='git log --oneline --decorate --graph --all'
+# alias glol='git log --graph --pretty='\''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'\'' --abbrev-commit'
+# alias glola='git log --graph --pretty='\''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'\'' --abbrev-commit --all'
+# alias glp=_git_log_prettily
+# alias glum='git pull upstream master'
+# alias gm='git merge'
+# alias gmnf='git merge --no-ff'
+# alias gmom='git merge origin/master'
+# alias gms='git merge --squash'
+# alias gmt='git mergetool --no-prompt'
+# alias gmtvim='git mergetool --no-prompt --tool=vimdiff'
+# alias gmum='git merge upstream/master'
+# alias gp='git push'
+# alias gpd='git push --dry-run'
+# alias gpoat='git push origin --all && git push origin --tags'
+# alias gpristine='git reset --hard && git clean -dfx'
+# alias gpsup='git push --set-upstream origin $(git_current_branch)'
+# alias gpu='git push upstream'
+# alias gpv='git push -v'
+# alias gr='[ ! -z `git rev-parse --show-cdup` ] && cd `git rev-parse --show-cdup || pwd`'
+# alias gra='git remote add'
+# alias grb='git rebase'
+# alias grba='git rebase --abort'
+# alias grbc='git rebase --continue'
+# alias grbi='git rebase -i'
+# alias grbm='git rebase master'
+# alias grbs='git rebase --skip'
+# alias grh='git reset HEAD'
+# alias grhh='git reset HEAD --hard'
+# alias grmv='git remote rename'
+# alias grrm='git remote remove'
+# alias grset='git remote set-url'
+# alias grt='cd $(git rev-parse --show-toplevel || echo ".")'
+# alias gru='git reset --'
+# alias grup='git remote update'
+# alias grv='git remote -v'
+# alias gsb='git status -sb'
+# alias gsps='git show --pretty=short --show-signature'
+# alias gcount='git shortlog -sn'
+# alias gss='git status -s'
+# alias gst='git status'
+# alias gsta='git stash save'
+# alias gstaa='git stash apply'
+# alias gstc='git stash clear'
+# alias gstd='git stash drop'
+# alias gstl='git stash list'
+# alias gstp='git stash pop'
+# alias gsts='git stash show --text'
+# alias gts='git tag -s'
+# alias gtv='git tag | sort -V'
+# alias gundo='git reset && git checkout . && git clean -fd'
+# alias undopush='git push -f origin HEAD^:master'
+# alias gunignore='git update-index --no-assume-unchanged'
+# alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
+# alias gup='git pull --rebase'
+# alias gupv='git pull --rebase -v'
+# alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
+
+# -------------------------------------------------------------------------------------------------------#
+#                                                  GIT FLOW                                                                   #
+# -------------------------------------------------------------------------------------------------------#
+# Main Branch: master
+# Supporting Branches: develop, release-*, or hotfix-*, [new-feature-name]
+#
+# -----------------------------------------------------#
+#         Feature Branches Steps                        #
+# ----------------------------------------------------#
+#$ git checkout -b myfeature develop # creates and switches to new branch
+#makes changes and commit often. Then, merge back into develop
+#$ git checkout develop # switch to develop branch
+#$ git merge --no-ff myfeature
+#$ git branch -d myfeature # delete myfeature branch
+#$ git push origin develop # updates origin
+#
+# -----------------------------------------------------#
+#         Release Branches Steps                        #
+# ----------------------------------------------------#
+# $ git checkout -b release-1.2 develop
+# bump version number (update gradle file) 1.2
+# $ git commit -a -m “Bumped version number to 1.2”
+# bug fixes may be applied in this branch but not features.
+# finalizing the release by merging to master
+# $ git checkout master
+# $ git merge --no-ff release-1.2
+# $ git tag -a 1.2
+# to keep the changes made in the release branch, we need to merge back into develop
+# $ git checkout develop
+# $ git merge --no-ff release-1.2
+# we can now safely remove the release branch
+# $ git branch -d release-1.2
+# -----------------------------------------------------#
+#         Hotfixes Branches Steps                       #
+# ----------------------------------------------------#
+# $ git checkout -b hotfix-1.2.1 master
+# bump version number (update gradle file) to 1.2.1
+# $ git commit -a -m “Bumped version number to 1.2.1”
+# fix the bug and commit the fix in one or more separate commits.
+# $ git commit -m “Fixed severe production problem”
+# merge back into master and develop.
+# $ git checkout master
+# $ git merge --no-ff hotfix-1.2.1
+# $ git tag -a 1.2.1
+# $ git checkout develop
+# $ git merge --no-ff hotfix-1.2.1
+# $ git branch -d hotfix-1.2.1
+
 [alias]
-  st = status
-  # checkout a branch by using git co some-branch
-  co = checkout
-  # create and checkout a new branch
-  cob = checkout -b
-  # opens the gitconfig file with my default editor
-  ec = config --global -e
-  #
-  up = !git pull --rebase --prune $@ && git submodule update --init --recursive
+  # checkout
+  co = checkout # checkout a branch by using git co some-branch
+  cob = checkout -b # create and checkout a new branch
+  codev = checkout develop
+  comas = checkout master
+  cobdev = "!f() { git checkout -b $1 develop; } ; f"
+  cobmas = "!f() { git checkout -b $1 master; } ; f"
+
+  # add commit
+  cmm = commit -m
+  cmam = commit -a -m
   cm = !git add -A && git commit -m
   save = !git add -A && git commit -m 'SAVEPOINT'
   wip = !git add -u && git commit -m "WIP"
   amend = commit -a --amend
   wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
+
+  # branch
+  bdel = branch -d
+
+  # push
+  p = push
+
+  # tag
+  ta = tag -a
+
+  # merge
+  # the --no-ff flag causes the merge to always create a new commit object, even if the merge could be performed with a fast-forward.
+  # This avoid losing information about the historical existence of a feature branch and group together all commits.
+  merge = merge -no-ff
+
+  st = status
+  # opens the gitconfig file with my default editor
+  cfg = config --global -e
+  cfgls ="!f() { git config --list; }; f"
+
+  #
+  up = !git pull --rebase --prune $@ && git submodule update --init --recursive
   bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs git branch -d; }; f"
   bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
 
@@ -42,8 +250,8 @@
   # https://git-scm.com/docs/git-log
   # via https://medium.com/@payload.dd/thanks-for-the-git-st-i-will-use-this-4da5839a21a4
 
-[merge]
-  ff = only
+# [merge]
+#   ff = only
   # I pretty much never mean to do a real merge, since I use a rebase workflow.
   # Note: this global option applies to all merges, including those done during a git pull
   # https://git-scm.com/docs/git-config#git-config-mergeff
