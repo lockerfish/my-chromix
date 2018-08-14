@@ -17,6 +17,7 @@ apt_packages=(
   'blender',
   'gimp',
   'lighttpd',
+  'jekyll',
   'most',
   'multitail',
   'htop',
@@ -34,6 +35,7 @@ npm_packages=(
   'nodemon', # automate restarting node
   'localtunnel', # expose localhost applications publicly
   'david', # find out when dependencies aare outdate
+  'serve',
   'firebase-tools'
 )
 
