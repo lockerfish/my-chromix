@@ -27,6 +27,8 @@ pkg_install() {
   fi
 }
 
+export -f pkg_install
+
 echo 'Install packages'
 for pkg in $(ls -d ~/.chromix/*/); do
   echo "Installing packages in: ${pkg%%/}";
