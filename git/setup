@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "
+----------------------------------------------------------------------------
+GIT SETUP
+----------------------------------------------------------------------------
+"
+cd ~
+ln -sf .chromix/git/git_completion .git_completion
+ln -sf .chromix/git/gitconfig .gitconfig
+ln -sf .chromix/git/gitignore .gitignore

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo "
+----------------------------------------------------------------------------
+BASH SETUP
+----------------------------------------------------------------------------
+"
+cd ~
+ln -sf .chromix/bash/bashrc .bashrc
+ln -sf .chromix/bash/bash_profile .bash_profile
+ln -sf .chromix/bash/bash_aliases .bash_aliases
+ln -sf .chromix/bash/bash_functions .bash_functions
+ln -sf .chromix/bash/bash_logout .bash_logout
