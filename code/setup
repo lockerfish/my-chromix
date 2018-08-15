@@ -17,24 +17,6 @@ curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microso
 sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
 sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
 
-pkg_install() {
-  echo "
-/-----------------------------------------------------------/
-  APT-GET: Installing $pkg_name
-/-----------------------------------------------------------/
-  "
-  dpkg -s $pkg_name >/dev/null 2>&1
-
-  if [ $? -eq 0 ]; then
-    echo "$pkg_name: already installed. Updating..."
-    sudo apt-get install --only-upgrade $pkg_name
-  else
-    sudo apt-get install -y $pkg_name
-    echo "$pkg_name: is now installed successfully!"
-    sudo apt-get -y update
-  fi
-}
-
 pkg_install
 
 code --install-extension Shan.code-settings-sync

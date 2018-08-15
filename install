@@ -9,17 +9,23 @@ echo 'Clone chromix'
 # [ -d .chromix ] && mv .chromix chromix-old
 # git clone git@github.com:lockerfish/my-chromix.git .chromix
 
-echo 'Link bash files'
-# bash
-# ln -sf .chromix/bash/bashrc .bashrc
-# ln -sf .chromix/bash/bash_profile .bash_profile
-# ln -sf .chromix/bash/bash_aliases .bash_aliases
-# ln -sf .chromix/bash/bash_functions .bash_functions
-# ln -sf .chromix/bash/bash_logout .bash_logout
-# git
-# ln -sf .chromix/git/git_completion .git_completion
-# ln -sf .chromix/git/gitconfig .gitconfig
-# ln -sf .chromix/git/gitignore .gitignore
+pkg_install() {
+  echo "
+/-----------------------------------------------------------/
+  APT-GET: Installing $pkg_name
+/-----------------------------------------------------------/
+  "
+  dpkg -s $pkg_name >/dev/null 2>&1
+
+  if [ $? -eq 0 ]; then
+    echo "$pkg_name: already installed. Updating..."
+    sudo apt-get install --only-upgrade $pkg_name
+  else
+    sudo apt-get install -y $pkg_name
+    echo "$pkg_name: is now installed successfully!"
+    sudo apt-get -y update
+  fi
+}
 
 echo 'Install packages'
 # ~/.chromix/chromix-setup

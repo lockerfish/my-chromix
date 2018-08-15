@@ -6,6 +6,8 @@ NODE SETUP
 ----------------------------------------------------------------------------
 "
 
+pkg_name='nodejs'
+
 echo "
 /-----------------------------------------------------------/
   Adding Nodesource debian package repo and key
@@ -13,3 +15,5 @@ echo "
 /-----------------------------------------------------------/
 "
 sudo sh -c "curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -"
+
+pkg_install

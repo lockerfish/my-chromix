@@ -15,7 +15,6 @@ pkg_name=''
 apt_packages=(
   'git',
   'gnupg2',
-  'nodejs',
   'python-pip',
   'python-pygments',
   'ffmpeg',

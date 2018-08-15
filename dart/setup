@@ -17,22 +17,4 @@ echo "
 sudo sh -c 'curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
 sudo sh -c 'curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list'
 
-pkg_install() {
-  echo "
-/-----------------------------------------------------------/
-  APT-GET: Installing $pkg_name
-/-----------------------------------------------------------/
-  "
-  dpkg -s $pkg_name >/dev/null 2>&1
-
-  if [ $? -eq 0 ]; then
-    echo "$pkg_name: already installed. Updating..."
-    sudo apt-get install --only-upgrade $pkg_name
-  else
-    sudo apt-get install -y $pkg_name
-    echo "$pkg_name: is now installed successfully!"
-    sudo apt-get -y update
-  fi
-}
-
 pkg_install
