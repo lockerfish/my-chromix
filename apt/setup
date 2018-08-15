@@ -27,6 +27,8 @@ apt_packages=(
   'htop',
   'mtr',
   'pydf',
+  'openjdk-8-jdk',
+  'openjdk-8-source',
   'libglu1-mesa', # required by Flutter
   'lib32stdc++6', # required by Flutter
   'apt-transport-https' # required by Dart
