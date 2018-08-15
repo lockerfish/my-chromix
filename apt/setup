@@ -1,3 +1,71 @@
 #!/bin/bash
 
-echo 'setting apt'
+echo "
+----------------------------------------------------------------------------
+APT SETUP
+----------------------------------------------------------------------------
+"
+IFS=','
+pkg_name=''
+
+#-----------------------------------------------------------#
+#                         Packages                          #
+#-----------------------------------------------------------#
+# list all debian based packages to install
+apt_packages=(
+  'git',
+  'gnupg2',
+  'nodejs',
+  'python-pip',
+  'python-pygments',
+  'ffmpeg',
+  'blender',
+  'gimp',
+  'lighttpd',
+  'jekyll',
+  'most',
+  'multitail',
+  'htop',
+  'mtr',
+  'pydf',
+  'libglu1-mesa', # required by Flutter
+  'apt-transport-https' # required by Dart
+)
+
+echo "
+/-----------------------------------------------------------/
+  Initial updating and upgrading of apt-get
+/-----------------------------------------------------------/
+"
+sudo apt-get -y update
+sudo apt -y full-upgrade
+
+pkg_install() {
+  echo "
+/-----------------------------------------------------------/
+  APT-GET: Installing $pkg_name
+/-----------------------------------------------------------/
+  "
+  dpkg -s $pkg_name >/dev/null 2>&1
+
+  if [ $? -eq 0 ]; then
+    echo "$pkg_name: already installed. Updating..."
+    sudo apt-get install --only-upgrade $pkg_name
+  else
+    sudo apt-get install -y $pkg_name
+    echo "$pkg_name: is now installed successfully!"
+    sudo apt-get -y update
+  fi
+}
+
+# install all apt packages
+for package in ${apt_packages[*]}; do
+  if [ $package ]; then
+    pkg_name=$package
+    pkg_install
+  fi
+done
+
+# clean up
+sudo apt-get autoremove
+sudo apt-get autoclean

@@ -23,10 +23,12 @@ echo 'Link bash files'
 
 echo 'Install packages'
 # ~/.chromix/chromix-setup
-cd ~/.chromix
-for pkg in $(ls -d */); do
-  echo ${pkg%%/};
-  cd ${pkg%%/};
-  ls -la
-  cd ..
+for pkg in $(ls -d ~/.chromix/*/); do
+  echo "Installing packages in: ${pkg%%/}";
+  if [ -f ${pkg%%/}/setup ]; then
+    echo "found"
+    ${pkg%%/}/setup;
+  else
+    echo "not found"
+  fi
 done

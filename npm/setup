@@ -1,3 +1,45 @@
 #!/bin/bash
 
-echo 'setting npm'
+echo "
+----------------------------------------------------------------------------
+NPM SETUP
+----------------------------------------------------------------------------
+"
+
+IFS=','
+pkg_name=''
+
+#list all npm packages to install
+npm_packages=(
+  'typescript',
+  'nodemon', # automate restarting node
+  'localtunnel', # expose localhost applications publicly
+  'david', # find out when dependencies aare outdate
+  'serve',
+  'firebase-tools'
+)
+
+npm_install() {
+  echo "
+/-----------------------------------------------------------/
+  NPM: Installing $pkg_name
+/-----------------------------------------------------------/
+  "
+  npm ls -g $pkg_name >/dev/null 2>&1
+
+  if [ $? -eq 0 ]; then
+    echo "$pkg_name: already installed. Updating..."
+    sudo npm update -g $pkg_name
+  else
+    sudo npm install -g $pkg_name
+    echo "$pkg_name: is now installed successfully!"
+  fi
+}
+
+# install all npm packages
+for package in ${npm_packages[*]}; do
+  if [ $package ]; then
+    pkg_name=$package
+    npm_install
+  fi
+done

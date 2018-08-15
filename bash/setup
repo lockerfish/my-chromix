@@ -1,6 +1,10 @@
 #!/bin/bash
 
-echo 'setting bash'
+echo "
+----------------------------------------------------------------------------
+BASH SETUP
+----------------------------------------------------------------------------
+"
 cd ~
 ln -sf .chromix/bash/bashrc .bashrc
 ln -sf .chromix/bash/bash_profile .bash_profile
