@@ -123,8 +123,6 @@ alias OPTIONS='lwp-request -m '\''OPTIONS'\'
 alias PUT='lwp-request -m '\''PUT'\'
 alias TRACE='lwp-request -m '\''TRACE'\'
 
-alias serve 'python '
-
 alias mem='free -mot'
 alias sp='du -chs --apparent-size'
 alias ht='htop -u `whoami`'

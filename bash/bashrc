@@ -255,4 +255,7 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-source ~/.git_completion
+source $HOME/.git_completion
+
+export PATH=$PATH:$HOME/flutter/bin
+export PATH=$PATH:$HOME/android-studio/bin
