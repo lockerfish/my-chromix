@@ -1,0 +1,22 @@
+#!/bin/bash
+
+echo "
+----------------------------------------------------------------------------
+FLUTTER SETUP
+----------------------------------------------------------------------------
+"
+cd ~
+
+[ -d flutter ] && sudo rm -r flutter
+
+git clone -b master https://github.com/flutter/flutter.git flutter
+
+# updating PATH directly on bashrc file
+
+$PWD/flutter/bin/flutter doctor
+
+$PWD/flutter/bin/flutter update-packages
+
+$PWD/flutter/bin/flutter precache
+
+$PWD/flutter/bin/flutter ide-config --overwrite
