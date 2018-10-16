@@ -21,7 +21,7 @@ apt_packages=(
   'blender',
   'gimp',
   'lighttpd',
-  'jekyll',
+#  'jekyll',
   'most',
   'multitail',
   'htop',

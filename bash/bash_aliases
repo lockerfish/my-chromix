@@ -128,6 +128,58 @@ alias sp='du -chs --apparent-size'
 alias ht='htop -u `whoami`'
 alias hta='htop'
 
+read -r -d '' VIMFLOW << EOM
+# -------------------------------------------------------------------------------------------------------#
+#                                                  GIT FLOW                                                                   #
+# -------------------------------------------------------------------------------------------------------#
+# Main Branch: master
+# Supporting Branches: develop, release-*, or hotfix-*, [new-feature-name]
+#
+# -----------------------------------------------------#
+#         Feature Branches Steps                        #
+# ----------------------------------------------------#
+#$ git checkout -b myfeature develop # creates and switches to new branch
+#makes changes and commit often. Then, merge back into develop
+#$ git checkout develop # switch to develop branch
+#$ git merge --no-ff myfeature
+#$ git branch -d myfeature # delete myfeature branch
+#$ git push origin develop # updates origin
+#
+# -----------------------------------------------------#
+#         Release Branches Steps                        #
+# ----------------------------------------------------#
+# $ git checkout -b release-1.2 develop
+# bump version number (update gradle file) 1.2
+# $ git commit -a -m “Bumped version number to 1.2”
+# bug fixes may be applied in this branch but not features.
+# finalizing the release by merging to master
+# $ git checkout master
+# $ git merge --no-ff release-1.2
+# $ git tag -a 1.2
+# to keep the changes made in the release branch, we need to merge back into develop
+# $ git checkout develop
+# $ git merge --no-ff release-1.2
+# we can now safely remove the release branch
+# $ git branch -d release-1.2
+# -----------------------------------------------------#
+#         Hotfixes Branches Steps                       #
+# ----------------------------------------------------#
+# $ git checkout -b hotfix-1.2.1 master
+# bump version number (update gradle file) to 1.2.1
+# $ git commit -a -m “Bumped version number to 1.2.1”
+# fix the bug and commit the fix in one or more separate commits.
+# $ git commit -m “Fixed severe production problem”
+# merge back into master and develop.
+# $ git checkout master
+# $ git merge --no-ff hotfix-1.2.1
+# $ git tag -a 1.2.1
+# $ git checkout develop
+# $ git merge --no-ff hotfix-1.2.1
+# $ git branch -d hotfix-1.2.1
+EOM
+
+alias show-git-flow='echo "$VIMFLOW"'
+
 # function checks if the application is installed
 function __add_command_replace_alias() {
     if [ -x "`which $2 2>&1`" ]; then
