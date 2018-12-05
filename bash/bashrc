@@ -258,11 +258,13 @@ fi
 source $HOME/.git_completion
 
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export ANDROID_HOME=~/android-sdk-linux
 
 export PATH=$PATH:$HOME/flutter/bin
 export PATH=$PATH:$HOME/android-studio/bin
 export PATH=$PATH:/usr/lib/jvm/java-8-openjdk/bin
 
-export PATH=$PATH:$HOME/Android/Sdk/tools
-export PATH=$PATH:$HOME/Android/Sdk/tools/bin
-export PATH=$PATH:$HOME/Android/Sdk/platform-tools
+export PATH=$PATH:$HOME/android-sdk-linux/tools
+export PATH=$PATH:$HOME/android-sdk-linux/tools/bin
+export PATH=$PATH:$HOME/android-sdk-linux/platform-tools
+

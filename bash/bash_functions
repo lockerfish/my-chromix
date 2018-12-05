@@ -81,3 +81,7 @@ function treeps() {
 	ps f -u $USER -o command,pid,%cpu,%mem,time,etime,tty | \
 		awk 'NR <= 1 {print;next} !/awk/ && $0~var' var=${1:-".*"}
 }
+
+function connect_adb() {
+	adb connect 100.115.92.2:5555
+}
