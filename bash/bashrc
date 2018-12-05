@@ -264,7 +264,6 @@ export PATH=$PATH:$HOME/flutter/bin
 export PATH=$PATH:$HOME/android-studio/bin
 export PATH=$PATH:/usr/lib/jvm/java-8-openjdk/bin
 
-export PATH=$PATH:$HOME/android-sdk-linux/tools
-export PATH=$PATH:$HOME/android-sdk-linux/tools/bin
-export PATH=$PATH:$HOME/android-sdk-linux/platform-tools
+export PATH=$PATH:$HOME/android-sdk/tools
+export PATH=$PATH:$HOME/android-sdk/platform-tools
 
