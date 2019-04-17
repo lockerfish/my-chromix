@@ -243,3 +243,5 @@
 	prompt = false
 [gpg]
 	program = gpg2
+[merge]
+	tool = vimdiff
