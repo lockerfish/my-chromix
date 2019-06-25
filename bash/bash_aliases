@@ -214,3 +214,7 @@ function allcolors() {
     done
     echo ""
 }
+
+# Flutter
+fa='find . | grep "\.dart$" | xargs flutter format && flutter analyze'
+
