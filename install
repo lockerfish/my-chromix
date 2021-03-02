@@ -29,7 +29,7 @@ pkg_install() {
 
 export -f pkg_install
 
-echo 'cleanup installed packages not required'
+echo 'cleanup installed packages'
 sudo apt autoremove
 
 echo 'Install packages'
@@ -42,3 +42,6 @@ for pkg in $(ls -d ~/.chromix/*/); do
     echo "not found"
   fi
 done
+
+echo 'cleanup installed packages'
+sudo apt autoremove
