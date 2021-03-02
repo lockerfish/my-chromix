@@ -28,6 +28,7 @@ apt_packages=(
   'mtr',
   'pydf',
   'tmux',
+  'fzf',
   'openjdk-8-jdk',
   'openjdk-8-source',
   'libglu1-mesa', # required by Flutter
