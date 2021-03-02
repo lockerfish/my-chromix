@@ -1,0 +1,19 @@
+#!/bin/bash
+
+echo "
+----------------------------------------------------------------------------
+TMUX SETUP
+----------------------------------------------------------------------------
+"
+ln -sf .chromix/tmux/tmux.conf .tmux.conf
+
+echo "
+----------------------------------------------------------------------------
+TMUX TPM SETUP
+----------------------------------------------------------------------------
+"
+sudo sh -c 'curl -o /tmp/chromix/tpm.zip https://codeload.github.com/tmux-plugins/tpm/zip/master'
+sudo sh -c 'unzip /tmp/chromix/tpm.zip -d /tmp/chromix/tpm'
+sudo sh -c 'mv /tmp/chromix/tpm/tpm-master ~/.tmux/plugins/tpm'
+sudo sh -c 'rm -rf /tmp/chromix/tpm/tpm-master'
+
